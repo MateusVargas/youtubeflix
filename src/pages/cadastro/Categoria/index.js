@@ -1,7 +1,8 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import PageDefault from '../../../components/PageDefault'
 import { Link } from 'react-router-dom'
 import FormField from '../../../components/FormField'
+import Button from '../../../components/Button'
 
 const CadastroCategoria = () => {
 
@@ -25,6 +26,17 @@ const CadastroCategoria = () => {
     const handleChange = (e) => {
         setValue(e.target.getAttribute('name'),e.target.value)
     }
+
+
+    useEffect(()=>{
+        const URL = window.location.hostname.includes('localhost')//se estiver localmente usa uma URL senão usa a externa
+         ? 'http://localhost:8080/categorias' : '<url externa>'
+
+        fetch(URL).then(async (resp) => {
+            const resposta = await resp.json()
+            setCategoria([...resposta])
+        })
+    },[])
 
     return(
         <PageDefault>
@@ -74,10 +86,16 @@ const CadastroCategoria = () => {
                 onChange={handleChange}
                 />
 
-                <button>
+                <Button>
                 Cadastrar
-                </button>
+                </Button>
             </form>
+
+            {categoria.length === 0 && (
+                <div>
+                    Loading...
+                </div>
+            )}
 
             <ul>
                 {categoria.map((cat,index)=>{

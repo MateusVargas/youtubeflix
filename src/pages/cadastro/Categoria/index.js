@@ -1,115 +1,101 @@
-import React,{useState,useEffect} from 'react'
-import PageDefault from '../../../components/PageDefault'
-import { Link } from 'react-router-dom'
-import FormField from '../../../components/FormField'
-import Button from '../../../components/Button'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import PageDefault from '../../../components/PageDefault';
+import FormField from '../../../components/FormField';
+import Button from '../../../components/Button';
+import useForm from '../../../hooks/useForm';
 
 const CadastroCategoria = () => {
+  const valoresIniciais = {
+    nome: '',
+    descricao: '',
+    cor: '',
+  };
 
-    const [categoria, setCategoria] = useState([])
+  const { handleChange, values, clearForm } = useForm(valoresIniciais);
 
-    const initialValues = {
-        nome: '',
-        descricao: '',
-        cor: ''
-    }
+  const [categorias, setCategorias] = useState([]);
 
-    const [values, setValues] = useState(initialValues)
-    
-    const setValue = (key,value) => {
-        setValues({
-            ...values,
-            [key]: value
-        })
-    }
+  useEffect(() => {
+    const URL = window.location.hostname.includes('localhost')//se estiver localmente usa uma URL senão usa a externa
+      ? 'http://localhost:8080/categorias'
+      : 'https://devsoutinhoflix.herokuapp.com/categorias';
 
-    const handleChange = (e) => {
-        setValue(e.target.getAttribute('name'),e.target.value)
-    }
-
-
-    useEffect(()=>{
-        const URL = window.location.hostname.includes('localhost')//se estiver localmente usa uma URL senão usa a externa
-         ? 'http://localhost:8080/categorias' : '<url externa>'
-
-        fetch(URL).then(async (resp) => {
-            const resposta = await resp.json()
-            setCategoria([...resposta])
-        })
+    fetch(URL)
+      .then(async (respostaDoServidor) => {
+        const resposta = await respostaDoServidor.json();
+        setCategorias([
+          ...resposta,
+        ]);
+      });
     },[])
+    
+  return (
+    <PageDefault>
+      <h1>
+        Cadastro de Categoria:
+        {values.nome}
+      </h1>
 
-    return(
-        <PageDefault>
-            <h1>Cadastro de categoria: {values.nome}</h1>
-            <form onSubmit={function handleSubmit(e){
-                e.preventDefault()
-                setCategoria([
-                    ...categoria,
-                    values
-                ])
+      <form onSubmit={function handleSubmit(infosDoEvento) {
+        infosDoEvento.preventDefault();
+        setCategorias([
+          ...categorias,
+          values,
+        ]);
 
-                setValues(initialValues)
-            }}>
+        clearForm();
+      }}
+      >
 
-                <FormField
-                label="Nome da Categoria"
-                type="text"
-                name="nome"
-                value={values.nome}
-                onChange={handleChange}
-                />
+        <FormField
+          label="Nome da Categoria"
+          name="nome"
+          value={values.nome}
+          onChange={handleChange}
+        />
 
-                <FormField
-                label="Descrição"
-                type="textarea"
-                name="descricao"
-                value={values.descricao}
-                onChange={handleChange}
-                />
-        {/* <div>
-          <label>
-            Descrição:
-            <textarea
-              type="text"
-              value={values.descricao}
-              name="descricao"
-              onChange={handleChange}
-            />
-          </label>
-        </div> */}
+        <FormField
+          label="Descrição"
+          type="textarea"
+          name="descricao"
+          value={values.descricao}
+          onChange={handleChange}
+        />
 
-                <FormField
-                label="Cor"
-                type="color"
-                name="cor"
-                value={values.cor}
-                onChange={handleChange}
-                />
+        <FormField
+          label="Cor"
+          type="color"
+          name="cor"
+          value={values.cor}
+          onChange={handleChange}
+        />
 
-                <Button>
-                Cadastrar
-                </Button>
-            </form>
+        <Button>
+          Cadastrar
+        </Button>
+      </form>
 
-            {categoria.length === 0 && (
-                <div>
-                    Loading...
-                </div>
-            )}
+      {categorias.length === 0 && (
+        <div>
+          {/* Cargando... */}
+          Loading...
+        </div>
+      )}
 
-            <ul>
-                {categoria.map((cat,index)=>{
-                    return(
-                        <li key={`${cat}${index}`}>{cat.nome}</li>
-                    )
-                })}
-            </ul>
+      <ul>
+        {categorias.map((categoria) => (
+          <li key={`${categoria.titulo}`}>
+            {categoria.titulo}
+          </li>
+        ))}
+      </ul>
 
-            <Link to='/'>
-                Ir para Home
-            </Link>
-        </PageDefault>
-    )
+      <Link to="/">
+        Ir para home
+      </Link>
+    </PageDefault>
+  );
 }
 
-export default CadastroCategoria
+export default CadastroCategoria;

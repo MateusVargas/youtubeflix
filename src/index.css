@@ -29,3 +29,19 @@ a {
   display: flex;
   flex-direction: column;
 }
+
+.submit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.submit button{
+  background-color: #04D361;
+  width: 60%;
+  height: 4rem;
+  color: white;
+  font-size: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}

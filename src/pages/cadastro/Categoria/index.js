@@ -71,9 +71,12 @@ const CadastroCategoria = () => {
           onChange={handleChange}
         />
 
-        <Button>
-          Cadastrar
-        </Button>
+        <div className="submit">
+          <button type="submit">
+            Cadastrar
+          </button>
+        </div>
+
       </form>
 
       {categorias.length === 0 && (

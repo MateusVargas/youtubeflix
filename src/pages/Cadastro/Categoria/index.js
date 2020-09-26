@@ -11,7 +11,6 @@ const CadastroCategoria = () => {
   
   const valoresIniciais = {
     nome: '',
-    descricao: '',
     cor: '',
   };
 
@@ -60,22 +59,12 @@ const CadastroCategoria = () => {
         {values.nome}
       </h1>
 
-      <form onSubmit={handleSubmit}
-
-      >
+      <form onSubmit={handleSubmit}>
 
         <FormField
           label="Nome da Categoria"
           name="nome"
           value={values.nome}
-          onChange={handleChange}
-        />
-
-        <FormField
-          label="Descrição"
-          type="textarea"
-          name="descricao"
-          value={values.descricao}
           onChange={handleChange}
         />
 

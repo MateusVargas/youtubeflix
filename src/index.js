@@ -4,8 +4,8 @@ import './index.css';
 
 import {BrowserRouter,Route,Switch} from 'react-router-dom'
 import Home from './pages/Home';
-import CadastroVideo from './pages/cadastro/Video'
-import CadastroCategoria from './pages/cadastro/Categoria';
+import CadastroVideo from './pages/Cadastro/Video'
+import CadastroCategoria from './pages/Cadastro/Categoria';
 
 //eslint: npx eslint --init, escolher as configurações e instalar as libs, se der erro no 
 //npm start: trocar a versão do eslint no package.json e dar npm install

@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../../assets/logoflix.png'
+import Logo from '../../assets/youtubeflix.png'
 import './Menu.css'
 import Button from '../Button'
 import {Link} from 'react-router-dom'

@@ -11,55 +11,51 @@ import api from '../../../config'
 
 function CadastroVideo() {
   const history = useHistory();
+
   const [categorias, setCategorias] = useState([]);
+  
   const categoryTitles = categorias.map(({ titulo }) => titulo);
+  
   const { handleChange, values } = useForm({
     titulo: '',
     url: 'https://www.youtube.com/watch?v=jOAU81jdi-c',
-    categoria: 'Front End',
+    categoria: '0',
   });
 
   useEffect(() => {
-    /*categoriasRepository
-      .getAll()
-      .then((categoriasFromServer) => {
-        setCategorias(categoriasFromServer);
-      });*/
-      async function getCategorias(){
-        try{
-          const response = await api.get('categorias')
-          setCategorias(response.data)
-        }catch(error){
-          console.log(error)
-        }
+    async function getCategorias(){
+      try{
+        const response = await api.get('categorias')
+        setCategorias(response.data)
+      }catch(error){
+        console.log(error)
       }
-
-      getCategorias()
+    }
+    getCategorias()
   }, []);
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    try{
+      if(values.categoria === '0'){
+        return alert('Selecione uma Categoria.')
+      }
+      const response = await api.post('videos',values)
+      if (response.status === 201) {
+        history.push('/')
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
 
   return (
     <PageDefault>
       <h1>Cadastro de Video</h1>
 
-      <form onSubmit={(event) => {
-        event.preventDefault();
-        // alert('Video Cadastrado com sucesso!!!1!');
+      <form onSubmit={handleSubmit}>
 
-        const categoriaEscolhida = categorias.find((categoria) => {
-          return categoria.titulo === values.categoria;
-        });
-
-        videosRepository.create({
-          titulo: values.titulo,
-          url: values.url,
-          categoriaId: categoriaEscolhida.id,
-        })
-          .then(() => {
-            console.log('Cadastrou com sucesso!');
-            history.push('/');
-          });
-      }}
-      >
         <FormField
           label="Título do Vídeo"
           name="titulo"
@@ -74,15 +70,13 @@ function CadastroVideo() {
           onChange={handleChange}
         />
 
-        <FormField
-          label="Categoria"
+        <select
           name="categoria"
           value={values.categoria}
           onChange={handleChange}
-          suggestions={categoryTitles}
-        />
+        >
+          <option value="0">Selecione uma Categoria</option>
 
-        <select>
           {categorias.map(categoria=>(
             <option key={categoria.id} value={categoria
               .id}>{categoria.titulo}</option>

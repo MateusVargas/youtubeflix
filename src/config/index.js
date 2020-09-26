@@ -1,7 +1,8 @@
-const URL_BACKEND = window.location.hostname.includes('localhost')
-  ? 'http://localhost:8080'
-  : 'https://devsoutinhoflix.herokuapp.com';
+import axios from 'axios'
 
-export default {
-  URL_BACKEND,
-};
+const api = axios.create({
+	baseURL: window.location.hostname.includes('localhost')
+	 ? 'http://localhost:8000/api' : 'https://devsoutinhoflix.herokuapp.com'
+})
+
+export default api

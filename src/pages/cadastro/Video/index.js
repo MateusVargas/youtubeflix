@@ -7,6 +7,8 @@ import Button from '../../../components/Button';
 import videosRepository from '../../../repositories/videos';
 import categoriasRepository from '../../../repositories/categorias';
 
+import api from '../../../config'
+
 function CadastroVideo() {
   const history = useHistory();
   const [categorias, setCategorias] = useState([]);
@@ -18,11 +20,21 @@ function CadastroVideo() {
   });
 
   useEffect(() => {
-    categoriasRepository
+    /*categoriasRepository
       .getAll()
       .then((categoriasFromServer) => {
         setCategorias(categoriasFromServer);
-      });
+      });*/
+      async function getCategorias(){
+        try{
+          const response = await api.get('categorias')
+          setCategorias(response.data)
+        }catch(error){
+          console.log(error)
+        }
+      }
+
+      getCategorias()
   }, []);
 
   return (
@@ -69,6 +81,13 @@ function CadastroVideo() {
           onChange={handleChange}
           suggestions={categoryTitles}
         />
+
+        <select>
+          {categorias.map(categoria=>(
+            <option key={categoria.id} value={categoria
+              .id}>{categoria.titulo}</option>
+          ))}
+        </select>
 
         <div className="submit">
           <button type="submit" style={{background:'var(--primary)'}}>

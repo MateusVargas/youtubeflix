@@ -5,7 +5,10 @@ import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 import useForm from '../../../hooks/useForm';
 
+import api from '../../../config'
+
 const CadastroCategoria = () => {
+  
   const valoresIniciais = {
     nome: '',
     descricao: '',
@@ -17,8 +20,8 @@ const CadastroCategoria = () => {
   const [categorias, setCategorias] = useState([]);
 
   useEffect(() => {
-    const URL = window.location.hostname.includes('localhost')//se estiver localmente usa uma URL senão usa a externa
-      ? 'http://localhost:8080/categorias'
+    /*const URL = window.location.hostname.includes('localhost')//se estiver localmente usa uma URL senão usa a externa
+      ? 'http://localhost:8000/api/categorias'
       : 'https://devsoutinhoflix.herokuapp.com/categorias';
 
     fetch(URL)
@@ -27,8 +30,28 @@ const CadastroCategoria = () => {
         setCategorias([
           ...resposta,
         ]);
-      });
+      });*/
+
+      async function getCategorias(){
+        try{
+          const response = await api.get('categorias')
+          setCategorias([...response.data])
+        }catch(error){
+          console.log(error)
+        }
+      }
+      getCategorias()
+
     },[])
+
+  async function handleSubmit(event){
+    event.preventDefault()
+    try{
+      const response = await api.post('categorias',values)
+    }catch(error){
+      console.log(error)
+    }
+  }
     
   return (
     <PageDefault>
@@ -37,15 +60,8 @@ const CadastroCategoria = () => {
         {values.nome}
       </h1>
 
-      <form onSubmit={function handleSubmit(infosDoEvento) {
-        infosDoEvento.preventDefault();
-        setCategorias([
-          ...categorias,
-          values,
-        ]);
+      <form onSubmit={handleSubmit}
 
-        clearForm();
-      }}
       >
 
         <FormField

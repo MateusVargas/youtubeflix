@@ -7,7 +7,28 @@ import Button from '../../../components/Button';
 import videosRepository from '../../../repositories/videos';
 import categoriasRepository from '../../../repositories/categorias';
 
+import styled from 'styled-components'
+
 import api from '../../../config'
+
+const Select = styled.select`
+  background: #53585D;
+  color: #F5F5F5;
+  display: block;
+  width: 100%;
+  height: 57px;
+  font-size: 18px;
+  outline: 0;
+  border: 0;
+  text-indent: 7px;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid #53585D;
+  margin-bottom: 45px;
+  resize: none;
+  border-radius: 4px;
+  -webkit-transition: border-color .3s;
+  transition: border-color .3s;
+`;
 
 function CadastroVideo() {
   const history = useHistory();
@@ -70,7 +91,7 @@ function CadastroVideo() {
           onChange={handleChange}
         />
 
-        <select
+        <Select
           name="categoria"
           value={values.categoria}
           onChange={handleChange}
@@ -81,7 +102,7 @@ function CadastroVideo() {
             <option key={categoria.id} value={categoria
               .id}>{categoria.titulo}</option>
           ))}
-        </select>
+        </Select>
 
         <div className="submit">
           <button type="submit" style={{background:'var(--primary)'}}>

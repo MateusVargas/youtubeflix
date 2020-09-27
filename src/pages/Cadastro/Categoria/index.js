@@ -4,6 +4,7 @@ import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 import useForm from '../../../hooks/useForm';
+import LoaderButton from '../../../components/LoaderButton'
 
 import api from '../../../config'
 
@@ -84,20 +85,17 @@ const CadastroCategoria = () => {
 
       </form>
 
-      {categorias.length === 0 && (
-        <div>
-          {/* Cargando... */}
-          Loading...
-        </div>
-      )}
-
-      <ul>
-        {categorias.map((categoria) => (
-          <li key={`${categoria.titulo}`}>
-            {categoria.titulo}
-          </li>
-        ))}
-      </ul>
+      <div className="suas-categorias">
+         <h3>Suas Categorias</h3>
+        {categorias.length === 0 && (<LoaderButton/>)}
+        <ul>
+          {categorias.map((categoria) => (
+            <li key={`${categoria.titulo}`}>
+              {categoria.titulo}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <Link to="/">
         Ir para home

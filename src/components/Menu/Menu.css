@@ -46,7 +46,7 @@
     border: 1px solid var(--white);
     box-sizing: border-box;
     cursor: pointer;
-    padding: 16px 24px;
+    padding: 10px 24px;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
@@ -67,7 +67,7 @@
     border: 1px solid var(--white);
     box-sizing: border-box;
     cursor: pointer;
-    padding: 16px 24px;
+    padding: 10px 24px;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
@@ -79,7 +79,7 @@
   }
   .LinkCategoria:hover,
   .LinkCategoria:focus {
-    opacity: .5;
+    opacity: .2;
   }
   
   @media (max-width: 800px) {
@@ -91,6 +91,7 @@
       border-radius: 0;
       border: 0;
       text-align: center;
+      text-decoration: none;
       width: 50%;
     }
     a.LinkCategoria {
@@ -101,6 +102,7 @@
       border-radius: 0;
       border: 0;
       text-align: center;
+      text-decoration: none;
       width: 50%;
     }
   }

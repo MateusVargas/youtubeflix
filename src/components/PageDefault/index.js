@@ -10,6 +10,10 @@ const Main = styled.main`
     padding-top: 50px;
     padding-left: 5%;
     padding-right: 5%;
+    @media (min-width: 800px){
+        padding-right: 12%;
+        padding-left: 12%;
+    }
 `
 
 const PageDefault = ({children}) => {

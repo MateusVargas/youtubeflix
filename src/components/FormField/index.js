@@ -11,7 +11,9 @@ const FormFieldWrapper = styled.div`
   }
 `;
 
-const Label = styled.label``;
+const Label = styled.label`
+  width: 100%;
+`;
 
 Label.Text = styled.span`
   color: #E5E5E5;

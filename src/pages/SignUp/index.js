@@ -22,7 +22,8 @@ function SignUp() {
 
   async function handleSignUp(event){
   	event.preventDefault()
-  	console.log(values)
+  	const response = await api.post('user/create',values)
+  	console.log(response)
   }
 
   return (

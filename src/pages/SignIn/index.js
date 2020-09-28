@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefaultToLogin from '../../components/PageDefaultToLogin';
 import LoaderButton from '../../components/LoaderButton'
 import FormField from '../../components/FormField';
 import useForm from '../../hooks/useForm';
 
+import AuthContext from '../../contexts/auth'
+
 import api from '../../config'
 
 function SignIn() {
+
+  const {signIn} = useContext(AuthContext)
 
   const valoresIniciais = {
     email: '',
@@ -20,9 +24,9 @@ function SignIn() {
     
   }, []);
 
-  async function handleSignIn(event){
+  function handleSignIn(event){
     event.preventDefault()
-    console.log(values)
+    signIn(values)
   }
 
   return (

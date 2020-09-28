@@ -50,8 +50,21 @@ export const AuthProvider = ({children}) => {
 
 
 	async function signOut(){
-		await localStorage.removeItem('tk')
-		setUser(null)
+		setLoading(true)
+		try{
+			const response = await api.post('auth/logout')
+			
+			if(response.status === 204){
+				await localStorage.removeItem('tk')
+    			api.defaults.headers['Authorization'] = ''
+				setUser(null)
+			}
+
+			setLoading(false)
+		}catch(error){
+			setLoading(false)
+			console.log(error)
+		}
 	}
 
 

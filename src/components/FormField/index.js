@@ -89,6 +89,7 @@ function FormField({
           type={type}
           value={value}
           name={name}
+          required="true"
           hasValue={hasValue}
           onChange={onChange}
           autoComplete={hasSuggestions ? 'off' : 'on'}

@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import {useHistory} from 'react-router-dom'
 import PageDefaultToLogin from '../../components/PageDefaultToLogin';
 import LoaderButton from '../../components/LoaderButton'
 import FormField from '../../components/FormField';
 import useForm from '../../hooks/useForm';
 
+import AuthContext from '../../contexts/auth'
+
 import api from '../../config'
 
 function SignUp() {
+
+  const {loading} = useContext(AuthContext)
+
+  const history = useHistory()
 
   const valoresIniciais = {
     email: '',
@@ -22,8 +29,16 @@ function SignUp() {
 
   async function handleSignUp(event){
   	event.preventDefault()
-  	const response = await api.post('user/create',values)
-  	console.log(response)
+  	loading(!loading)
+  	/*try{
+	  	event.preventDefault()
+	  	const response = await api.post('user/create',values)
+	  	if(response.status === 201){
+	  		history.push('/login')
+	  	}
+  	}catch(error){
+  		console.log(error)
+  	}*/
   }
 
   return (

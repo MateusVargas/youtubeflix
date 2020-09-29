@@ -22,7 +22,7 @@ const Main = styled.main`
 const PageDefaultToLogin = ({children}) => {
     return(
         <>
-            <nav className="Menu">
+            <nav className="menu-login">
                 <img className="Logo" src={Logo} alt="image"/>
             </nav>
 

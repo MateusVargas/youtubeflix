@@ -33,7 +33,7 @@
   @media (max-width: 800px) {
     .Menu {
       height: 40px;
-      justify-content: center;
+      justify-content: space-between;
     }
     body {
       --bodyPaddingTop: 40px;
@@ -81,8 +81,31 @@
   .LinkCategoria:focus {
     opacity: .2;
   }
+
+  .sair{
+    color: var(--white);
+    background-color: #DA1515;
+    border: 1px solid var(--white);
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 10px 24px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    outline: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity .3s;
+    margin-left: 5px;
+  }
   
   @media (max-width: 800px) {
+    .sair{
+      padding: 3px 13px;
+      font-size: 1rem;
+      background-color: transparent;
+    }
     a.LinkVideo {
       position: fixed;
       left: 0;

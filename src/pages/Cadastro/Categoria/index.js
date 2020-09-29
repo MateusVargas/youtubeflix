@@ -9,6 +9,8 @@ import LoaderButton from '../../../components/LoaderButton'
 import api from '../../../config'
 
 const CadastroCategoria = () => {
+
+  const [loading, setLoading] = useState(false)
   
   const valoresIniciais = {
     nome: '',
@@ -33,12 +35,14 @@ const CadastroCategoria = () => {
       });*/
 
       async function getCategorias(){
+        setLoading(false)
         try{
           const response = await api.get('categorias')
           setCategorias([...response.data])
         }catch(error){
           console.log(error)
         }
+        setLoading(false)
       }
       getCategorias()
 
@@ -88,7 +92,8 @@ const CadastroCategoria = () => {
 
       <div className="suas-categorias">
          <h3>Suas Categorias</h3>
-        {categorias.length === 0 && (<LoaderButton/>)}
+         {loading && (<LoaderButton/>)}
+         {categorias.length === 0 && <h4>Você não cadastrou nenhuma categoria.</h4>}
         <ul>
           {categorias.map((categoria) => (
             <li key={`${categoria.titulo}`}>

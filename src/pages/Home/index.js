@@ -26,14 +26,13 @@ function Home() {
     getVideos()
   }, []);
 
-  if(loading){
-    return <LoaderButton/>
-  }
 
   return (
     <PageDefault paddingAll={0}>
-      {videoData.length === 0 && <h3>Você não cadastrou nenhum vídeo ainda.</h3>}
+      {videoData.length === 0 && <h3 className="text-center">Você não cadastrou nenhum vídeo ainda.</h3>}
       
+      {loading && <LoaderButton/>}
+
       {videoData.map((categoria, indice) => {
         if (indice === 0) {
           return (

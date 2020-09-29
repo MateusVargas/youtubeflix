@@ -13,6 +13,8 @@ function SignIn() {
 
   const {signIn} = useContext(AuthContext)
 
+  const [loading, setLoading] = useState(false)
+
   const valoresIniciais = {
     email: '',
     password: '',
@@ -26,6 +28,7 @@ function SignIn() {
 
   function handleSignIn(event){
     event.preventDefault()
+    setLoading(true)
     signIn(values)
   }
 
@@ -53,6 +56,7 @@ function SignIn() {
           <div className="submit">
             <button type="submit">
               Entrar
+              {loading && <div className="ml-4" style={{fontSize:'1rem'}}><LoaderButton/></div>}
             </button>
           </div>
 

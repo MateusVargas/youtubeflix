@@ -11,7 +11,7 @@ import api from '../../config'
 
 function SignUp() {
 
-  const {loading} = useContext(AuthContext)
+  const [loading,setLoading] = useState(false)
 
   const history = useHistory()
 
@@ -29,16 +29,18 @@ function SignUp() {
 
   async function handleSignUp(event){
   	event.preventDefault()
-  	loading(!loading)
-  	/*try{
+	setLoading(true)
+  	try{
 	  	event.preventDefault()
 	  	const response = await api.post('user/create',values)
 	  	if(response.status === 201){
 	  		history.push('/login')
-	  	}
+		}
+		setLoading(false)  
   	}catch(error){
-  		console.log(error)
-  	}*/
+		console.log(error)
+		setLoading(false)
+  	}
   }
 
   return (
@@ -72,6 +74,7 @@ function SignUp() {
 	        <div className="submit">
 	          <button type="submit">
 	            Criar Conta
+				{loading && <div className="ml-4" style={{fontSize:'1rem'}}><LoaderButton/></div>}
 	          </button>
 	        </div>
 

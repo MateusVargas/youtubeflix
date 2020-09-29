@@ -31,19 +31,14 @@ export const AuthProvider = ({children}) => {
 
 
 	async function signIn(data){
-		setLoading(true)
 		try{
 			const response = await api.post('auth/login',data)
-			
 			if(response.status === 200){
 				localStorage.setItem('tk',JSON.stringify(response.data.access_token))
     			api.defaults.headers['Authorization'] = `Bearer ${response.data.access_token}`
 				setUser(true)
 			}
-
-			setLoading(false)
 		}catch(error){
-			setLoading(false)
 			console.log(error)
 		}
 	}

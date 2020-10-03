@@ -93,9 +93,9 @@ const CadastroCategoria = () => {
       <div className="suas-categorias">
          <h3>Suas Categorias</h3>
          {loading && (<LoaderButton/>)}
-         {categorias.length === 0 && <h4>Você não cadastrou nenhuma categoria.</h4>}
+         {categorias.length === 0 && <h4 className="text-center">Você não cadastrou nenhuma categoria.</h4>}
         <ul>
-          {categorias.map((categoria) => (
+          {categorias && categorias.map((categoria) => (
             <li key={`${categoria.titulo}`}>
               {categoria.titulo}
             </li>

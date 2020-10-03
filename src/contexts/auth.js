@@ -22,7 +22,13 @@ export const AuthProvider = ({children}) => {
 			const tk = localStorage.getItem('tk')
 			if(tk){
 				api.defaults.headers.Authorization = `Bearer ${JSON.parse(tk)}`
-				setUser(true)
+				const response = await api.get('auth/me')
+				if(response.status === 200){
+					setUser({email: response.data.email})
+				}
+			}
+			else{
+				setUser(null)
 			}
 			setLoading(false)
 		}
@@ -36,7 +42,7 @@ export const AuthProvider = ({children}) => {
 			if(response.status === 200){
 				localStorage.setItem('tk',JSON.stringify(response.data.access_token))
     			api.defaults.headers['Authorization'] = `Bearer ${response.data.access_token}`
-				setUser(true)
+				setUser({email: response.data.user.original.email})
 			}
 		}catch(error){
 			console.log(error)

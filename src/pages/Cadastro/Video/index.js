@@ -47,7 +47,7 @@ function CadastroVideo() {
     async function getCategorias(){
       try{
         const response = await api.get('categorias')
-        setCategorias(response.data)
+        setCategorias([...response.data])
       }catch(error){
         console.log(error)
       }
@@ -100,7 +100,7 @@ function CadastroVideo() {
         >
           <option value="0">Selecione uma Categoria</option>
 
-          {categorias.map(categoria=>(
+          {categorias && categorias.map(categoria=>(
             <option key={categoria.id} value={categoria
               .id}>{categoria.titulo}</option>
           ))}

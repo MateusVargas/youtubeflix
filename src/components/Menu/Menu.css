@@ -57,10 +57,6 @@
     transition: opacity .3s;
     margin-right: 5px;
   }
-  .LinkVideo:hover,
-  .LinkVideo:focus {
-    opacity: .5;
-  }
 
   .LinkCategoria {
     color: var(--white);
@@ -76,10 +72,6 @@
     text-decoration: none;
     display: inline-block;
     transition: opacity .3s;
-  }
-  .LinkCategoria:hover,
-  .LinkCategoria:focus {
-    opacity: .2;
   }
 
   .sair{
@@ -114,7 +106,7 @@
       border-radius: 0;
       border: 0;
       text-align: center;
-      text-decoration: none;
+      text-decoration: none !important;
       width: 50%;
     }
     a.LinkCategoria {
@@ -125,7 +117,7 @@
       border-radius: 0;
       border: 0;
       text-align: center;
-      text-decoration: none;
+      text-decoration: none !important;
       width: 50%;
     }
   }

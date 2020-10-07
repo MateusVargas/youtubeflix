@@ -17,7 +17,7 @@ function Home() {
       setLoading(true)
       try{
         const response = await api.get('categorias/videos')
-        setVideoData(response.data)
+        setVideoData(response.data[0] ? response.data : [])
       }catch(error){
         console.log(error)
       }
@@ -33,7 +33,7 @@ function Home() {
       
       {loading && <LoaderButton/>}
 
-      {videoData.map((categoria, indice) => {
+      {videoData && videoData.map((categoria, indice) => {
         if (indice === 0) {
           return (
             <div key={categoria.id}>
